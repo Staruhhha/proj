@@ -1,0 +1,21 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        {{ supplier.name }}
+    {% endblock %}
+
+    {% block content %}
+    <h1>{{ supplier.name }}</h1>
+
+    <h4>{{ supplier.agent_firstname }} {{ supplier.agent_name }} {{ supplier.agent_patronymic }}</h4>
+    <h5>{{ supplier.agent_telephone }}</h5>
+    <p>{{ supplier.address }}</p>
+
+    {% for supply in supplier.supply_set.all %}
+        {% for product in supply.product.all %}
+            <h3>{{ product.name }}</h3>
+        {% endfor %}
+
+    {% endfor %}
+
+    {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for object in object_list %}
+            <div class="col col-3">
+                <a href="{% url 'order_detail' object.pk %}">{{ object.FIO_customer }}</a>
+            </div>
+            <div class="col col-3">
+                {{ object.delivery_address }} {{ object.delivery_type }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block additional_content %}
+    {% if perms.magazine.add_order %}
+        <a class="btn btn-primary" href="{% url 'order_create' %}">Создать заказ</a>
+    {% endif %}
+{% endblock %}

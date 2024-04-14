@@ -1,0 +1,8 @@
+{% if messages %}
+        <h1>ОПОВЕЩЕНИЕ</h1>
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %}

@@ -1,0 +1,20 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        Добавление поставщика<
+    {% endblock %}
+
+
+    {% block content %}
+    <h1>Добавление поставщика</h1>
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Создать поставщика</button>
+    </form>
+
+    <a href="{% url 'catalog_supplier_page' %}">Обратно к списку поставщиков</a>
+
+    {% endblock %}

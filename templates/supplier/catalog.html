@@ -1,0 +1,34 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        Поставщики
+    {% endblock %}
+
+    {% block content %}
+
+    <h1>Поставщики</h1>
+
+    <p>
+        <a href="{% url 'home_page' %}">Домашняя страница</a>
+    </p>
+
+    <div>
+        <a href="{% url 'create_supplier_page' %}">Добавить поставщика</a>
+    </div>
+
+    <div>
+
+        {% for supplier in list_sup %}
+
+            <div class="card">
+                <h5 class="card-header">{{ supplier.name }}</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ supplier.agent_firstname }} {{ supplier.agent_name|slice:"0:1" }}. {{ supplier.agent_patronymic|slice:"0:1" }}.</p>
+                    <a href="{% url 'supplier_by_FIO' f"{supplier.agent_firstname}-{supplier.agent_name}" %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {% endblock %}

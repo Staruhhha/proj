@@ -1,0 +1,41 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    Пример фильтров Django
+{% endblock %}
+
+{% block content %}
+    <p><b>add </b>{{ digit|add:"4" }}</p>
+    <p><b>add </b>{{ string|add:"sdadas" }}</p>
+    <p><b>addslashes </b>{{ string|addslashes }}</p>
+    <p><b>capfirst </b>{{ string2|capfirst }}</p>
+    <p><b>center </b> {{ string2|center:"15" }}</p>
+    <p><b>cut </b>{{ string2|cut:" " }}</p>
+    <p><b>date </b>{{ datetime|date:"D d M Y" }} {{ datetime|time:"H:i" }}</p>
+    <p><b>date </b>{{ datetime|date:"SHORT_DATE_FORMAT" }}</p>
+    <p><b>default </b>{{ var1|default:"asdad" }}</p>
+    <p><b>default </b>{{ var3|default_if_none:"asdad" }}</p>
+    <p><b>dictsort</b>{{ dict_col|dictsort:"price" }}</p>
+    <p><b>dictsort</b>{{ dict_col|dictsort:"name" }}</p>
+    <p><b>dictsortreversed </b>{{ dict_col|dictsortreversed:"price" }}</p>
+    <p><b>divisibleby </b>{{ digit|divisibleby:"3" }}</p>
+    <p><b>divisibleby </b>{{ digit|divisibleby:"5" }}</p>
+    <p><b>filesizeformat </b>{{ digit|add:"12002300"|filesizeformat }}</p>
+    <p><b>first </b>{{ some_list|first }}</p>
+    <p><b>last </b>{{ some_list|last }}</p>
+    <p><b>floatformat </b>{{ floatdig|floatformat }}</p>
+    <p><b>floatformat </b>{{ floatdig|floatformat:"0" }}</p>
+    <p><b>floatformat </b>{{ floatdig|floatformat:"3" }}</p>
+    <p><b>get_digit </b>{{ digit|get_digit:"1"}}</p>
+    <p><b>length </b>{{ string|length }}</p>
+    <p><b>length_is </b>{{ string|length_is:"16" }}</p>
+    <p><b>random </b>{{ some_list|random }}</p>
+    <p><b>slice </b>{{ some_list|slice:"2" }}</p>
+    <p><b>upper</b> {{ string|upper }}</p>
+    <p><b>wordwrap </b>{{ string|wordwrap:5 }}</p>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

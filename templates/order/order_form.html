@@ -1,0 +1,17 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    {{ action }} заказ
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-success" type="submit">{{ action }} заказ</button>
+    </form>
+{% endblock %}
+
+{% block additional_content %}
+    <a class="btn btn-success" href="{% url 'get_order' %}">Назад</a>
+{% endblock %}

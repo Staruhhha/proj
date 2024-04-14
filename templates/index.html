@@ -1,0 +1,37 @@
+
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    Домашняя страница
+{% endblock %}
+
+    {% block content %}
+    <h1> Домашняя страница</h1>
+    <ul>
+        <li><a href="{% url 'catalog_product_page' %}">Каталог продуктов</a></li>
+
+
+
+    </ul>
+
+    <div>
+        {% if request.user.is_anonymous %}
+             <li><a href="{% url 'anon' %}">Анонимный</a></li>
+        {% elif request.user.is_authenticated %}
+            <li><a href="{% url 'auth' %}">Авторизированный</a></li>
+        {% endif %}
+    </div>
+
+   <div>
+        {% if perms.magazine.add_product %}
+           <li><a href="{% url 'can_add' %}">Может добалвять</a></li>
+        {% endif %}
+        {% if perms.magazine.add_product and perm.magazine.change_product %}
+            <li><a href="{% url 'can_add_change' %}">Может добавлять и изменять</a></li>
+        {% endif %}
+        {% if perms.magazine.change_delivery_type %}
+            <li><a href="{% url 'can_change_del' %}">Может изменять способ доставки</a></li>
+        {% endif %}
+    </div>
+    {% endblock %}
+

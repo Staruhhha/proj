@@ -1,0 +1,16 @@
+{% extends 'temp/base.html' %}
+{% block title_name %}
+    Удаление {{ object.pk }}
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Вы действительно хотите удалить заказ №{{ object.pk }} ?</h1>
+        <button class="btn btn-danger" type="submit">Да</button>
+    </form>
+{% endblock %}
+
+{% block additional_content %}
+    <a class="btn btn-outline-success" href="{% url 'get_order' %}">Нет</a>
+{% endblock %}

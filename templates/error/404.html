@@ -1,0 +1,24 @@
+{% extends 'temp/base.html' %}
+{% load static %}
+
+{% block title_name %}
+    {{ title }}
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container align-content-center">
+        <h1>404</h1>
+        <h2>{{ title }}</h2>
+        <p>Скорее всего, вы попали сюда из-за опечатки в адресе страницы. Попробуйте <a href="{% url 'home_page' %}">вернуться на главную</a> или свяжитесь с администрацией сайта.</p>
+        <img src="{% static 'magazine/image/404.gif' %}" alt="ошибочка">
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

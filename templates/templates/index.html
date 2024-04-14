@@ -1,0 +1,16 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+
+{% endblock %}
+
+{% block header %}
+    {% include 'temp/_inc/_header_template.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <a class="btn btn-warning" href="{% url 'template_tag' %}">Теги</a>
+    <a class="btn btn-warning" href="{% url 'template_filter' %}">Фильтры</a>
+
+{% endblock %}

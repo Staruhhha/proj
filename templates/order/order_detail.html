@@ -1,0 +1,25 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    Заказ №{{ object.pk }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {{ order.FIO_customer }}
+            </div>
+            <div class="col">
+                {{ order.delivery_address }}
+                {{ order.delivery_type }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_content %}
+    <a class="btn btn-success" href="{% url 'get_order' %}">К списку</a>
+    <a class="btn btn-warning" href="{% url 'order_update' object.pk %}">Изменить</a>
+    <a class="btn btn-danger" href="{% url 'order_delete' object.pk %}">Удалить</a>
+{% endblock %}

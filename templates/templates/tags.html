@@ -1,0 +1,190 @@
+{% extends 'temp/base.html' %}
+{% load static %}
+
+{% block title_name %}
+    Теги в django
+{% endblock %}
+
+{% block content %}
+    <h1>Теги в django</h1>
+    <div>
+        <h2>autoescape</h2>
+        <div>Управление текущим экранированием</div>
+        {% autoescape on %}
+            {{ html_code }}
+        {% endautoescape %}
+
+        {% autoescape off %}
+            {{ html_code }}
+        {% endautoescape %}
+
+    </div>
+
+    <div>
+        <h2>load</h2>
+        <div>Загружает настраиваемый набор тегов шаблона</div>
+    </div>
+
+    <div>
+        <h2>extends</h2>
+        <div>Сигнализирует, что этот шаблон расширяет родительский шаблон</div>
+    </div>
+
+    <div>
+        <h2>block</h2>
+        <div>Определяет болок, который может быть переопределен дочерними шаблонами</div>
+    </div>
+
+    <div>
+        <h2>include</h2>
+        <div>Загружаеь щаблон и отображает его с текущим контекстом</div>
+    </div>
+
+    <div>
+        <h2>comment</h2>
+        <div>Блок комментариев</div>
+        {% comment %}
+        <p>
+            qeafad
+            fwefwef
+            wefwef
+            ewfwef
+        </p>
+        {% endcomment %}
+    </div>
+
+    <div>
+        <h2>csrf_token</h2>
+        <div>Тег для защити csrf</div>
+        {% csrf_token %}
+    </div>
+
+    <div>
+        <h2>if</h2>
+        <div>Логический оператор</div>
+        <ul>
+            {% if var1 == None %}
+                <p>var1 равно None</p>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>for</h2>
+        <div>Перебор</div>
+        <ul>
+            {% for item in some_list %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>for...empty</h2>
+        <div>for...empty заменяет комбинацию if и for для проверки списка на наличие значений</div>
+         {% for item in some_list %}
+                <li>{{ item }}</li>
+         {% empty %}
+             <li>Нет новых данных((((</li>
+         {% endfor %}
+    </div>
+
+    <div>
+        <h2>cycle</h2>
+        <div>Циклично выводит элементы из списка</div>
+        <table class="table">
+            <tbody>
+                  {% for item in some_list %}
+                        <tr class="table-{% cycle 'primary' 'warning' 'success' 'secondary' %}">
+                            <td>{{ item }}</td>
+                        </tr>
+                  {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>ifchanged</h2>
+        <div>Проверяет, изменилось ли значение с последней итерации цикла</div>
+        <table class="table">
+            <tbody>
+                  {% for item in some_list %}
+                        <tr class="table-{% cycle 'primary' 'warning' 'success' 'secondary' %}">
+                            {% ifchanged %}
+                                <td>{{ item }}</td>
+                            {% endifchanged %}
+                        </tr>
+                  {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>filter</h2>
+        <div>Фильтрует содержимое блока</div>
+        {% filter force_escape|lower %}
+            This text will be HTML-escaped, and will appear in all lowercase.
+        {% endfilter %}
+    </div>
+
+    <div>
+        <h2>firstof</h2>
+        <div>Выводит первую переменную аргумента, котороя не является ложной</div>
+        {% firstof var1 var2 var3 var4 var5 %}
+    </div>
+
+    <div>
+        <h2>now</h2>
+        <div>Отображет текущую дату и время в соответствие с форматом</div>
+        {% now 'jS F Y H:i' %}
+        <br>
+        {% now 'DATETIME_FORMAT' %}
+    </div>
+
+    <div>
+        <h2>spaceless</h2>
+        <div>Удаляет проблемы между тегами HTML</div>
+        {% spaceless %}
+            <p>
+                <a href="foo/"> Foo</a>
+            </p>
+        {% endspaceless %}
+    </div>
+
+    <div>
+        <h2>templatetag</h2>
+        <div>Выводит один из синтаксических символов</div>
+{#        {% templatetag openblock %}#}
+    </div>
+
+    <div>
+        <h2>url</h2>
+        <div>возвращает ссылку на абсолютный путь</div>
+        <a class="btn btn-warning" href="{% url 'template_filter' %}">Фильтры</a>
+    </div>
+
+    <div>
+        <h2>with</h2>
+        <div>кэширует сложную переменную под простым именем</div>
+        {% with query = obj.name %}
+            {{ query }}
+        {% endwith %}
+    </div>
+
+    <div>
+        <h2>lorem</h2>
+        <div>Отображает текст lorem ipsum</div>
+        {% lorem 2 p random %}
+    </div>
+
+    <div>
+        <h2>debug</h2>
+        <div>выводит отладочную информацию</div>
+        {% debug %}
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    Список категорий
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'category_create' %}" class="btn btn-outline-success">Добавить категорию</a>
+
+    {% for object in object_list %}
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a href="{% url 'category_detail' object.pk %}" class="btn btn-outline-dark">Подробнее</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-secondary" href="{% url 'category_update' object.pk %}">Изменить</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" href="{% url 'delete_category' object.pk %}">Удалить (с подтверждением)</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'delete_category' object.pk %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger">Удалить (сразу)</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ object.title }}</h5>
+        </div>
+    </div>
+
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block additional_content %}
+    {% if is_paginated %}
+        <nav aria-label="Пагинация">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Назад">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for p in paginator.page_range %}
+                    {% if p == page_obj.number %}
+                        <li class="page-item"><a class="page-link active">{{ p }}</a></li>
+                    {% elif p >= page_obj.number|add:"-1" and p <= page_obj.number|add:"2"%}
+                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                    {% else %}
+                        {% if p == 1 %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                            <li class="page-item"><p class="page-link">...</p></li>
+                        {% elif p == paginator.num_pages %}
+                            <li class="page-item"><p class="page-link">...</p></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Далее">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}

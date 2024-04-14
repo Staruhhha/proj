@@ -1,0 +1,52 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        {{ product.name }}
+    {% endblock %}
+
+    {% block content %}
+
+    <h1>Продкут {{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <h3>Цена: {{ product.price }}</h3>
+
+    <p>
+        Категория: {{ product.category.title }}
+        {% if product.category.description %}
+        	Описание категории: {{ product.category.description }}
+        {% endif %}
+    </p>
+
+     <h2>Теги</h2>
+        <p>
+            {% for tag in product.tag.all %}
+                {{ tag }}.
+            {% endfor %}
+        </p>
+
+     {% if product.pos_parametr_set.all %}
+        <h2>Характеристики</h2>
+        <p>
+         {% for pos_param in product.pos_parametr_set.all %}
+            {{ pos_param.parametr }} : {{ pos_param.value }} <br>
+         {% endfor %}
+        </p>
+     {% endif %}
+
+
+
+
+{#    {% if request.user.is_authenticated %}#}
+{#        <form method="post">#}
+{#            {% csrf_token %}#}
+{#            <input type="submit" value="Добавить в корзину">#}
+{#        </form>#}
+{#    {% endif %}#}
+
+        <form method="post" action="{% url 'basket_add' product.pk %}">
+            {% csrf_token %}
+            {{ form_basket }}
+            <button type="submit" class="bt btn-success">Добавить в корзину</button>
+        </form>
+
+    {% endblock %}

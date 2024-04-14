@@ -1,0 +1,18 @@
+{% extends 'temp/base.html' %}
+
+{% block title_name %}
+    {{ action }} {{ object.title }}
+{% endblock %}
+
+
+{% block content%}
+
+    <h1> {{ action }} {{ object.title }}</h1>
+    <form method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">{{ action }}</button>
+    </form>
+    <a href="{% url 'get_category' %}" class="btn-outline-primary">Обратно к списку</a>
+
+{% endblock %}

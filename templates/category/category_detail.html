@@ -1,0 +1,12 @@
+{% extends 'temp/base.html' %}
+{% block title_name %}
+    {{ object.title }}
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'get_category' %}" class="btn btn-outline-primary">Обратно к списку</a>
+    <h2>{{ object.title }}</h2>
+    <p>{{ object.description }}</p>
+
+{% endblock %}

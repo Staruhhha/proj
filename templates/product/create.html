@@ -1,0 +1,21 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        Добавление продукта
+    {% endblock %}
+
+    {% block content %}
+
+    <h1>Добавление продукта</h1>
+
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Добавить товар</button>
+    </form>
+
+    <a href="{% url 'catalog_product_page' %}" class="btn btn-info">Назад</a>
+
+    {% endblock %}
+
+

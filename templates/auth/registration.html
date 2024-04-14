@@ -1,0 +1,22 @@
+{% extends 'temp/base.html' %}
+
+    {% block title_name %}
+        Регистрация
+    {% endblock %}
+
+    {% block content %}
+    <h1>Регистрация</h1>
+
+
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <input type="submit" value="Зарегистрироваться">
+        </form>
+    </div>
+
+    <a href="{% url 'home_page' %}">Назад</a>
+
+    {% endblock %}
+
