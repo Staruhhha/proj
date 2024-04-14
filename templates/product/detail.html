@@ -1,40 +1,60 @@
 {% extends 'temp/base.html' %}
-
+{% load static %}
     {% block title_name %}
         {{ product.name }}
     {% endblock %}
 
     {% block content %}
 
-    <h1>Продкут {{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <h3>Цена: {{ product.price }}</h3>
+    <div class="container">
+        <div class="row gx-5">
+          <aside class="col-lg-6">
+            <div class="border rounded-4 mb-3 d-flex justify-content-center">
+              <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
+                <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ product.photo.url }}" />
+              </a>
+            </div>
+          </aside>
+            <main class="col-lg-6">
+        <div class="ps-lg-3">
+          <h4 class="title text-dark">{{ product.name }}</h4>
 
-    <p>
-        Категория: {{ product.category.title }}
-        {% if product.category.description %}
-        	Описание категории: {{ product.category.description }}
-        {% endif %}
-    </p>
+          <div class="mb-3">
+            <span class="h5">{{ product.price }} ₽</span>
 
-     <h2>Теги</h2>
-        <p>
-            {% for tag in product.tag.all %}
-                {{ tag }}.
-            {% endfor %}
-        </p>
+          </div>
 
-     {% if product.pos_parametr_set.all %}
-        <h2>Характеристики</h2>
-        <p>
-         {% for pos_param in product.pos_parametr_set.all %}
-            {{ pos_param.parametr }} : {{ pos_param.value }} <br>
-         {% endfor %}
-        </p>
-     {% endif %}
+          <p>
+            {{ product.description }}
+          </p>
 
+          <div class="row">
+            <dt class="col-3">Категория:</dt>
+            <dd class="col-9">{{ product.category }}</dd>
 
+            <dt class="col-3">Теги: </dt>
+           {% for tag in product.tag.all %}
+               <dd class="col-9">
+                {{ tag }}
+               </dd>
+           {% endfor %}
+          </div>
 
+          <hr />
+               <div class="row mb-4">
+            <!-- col.// -->
+            <div class="col-md-4 col-6 mb-3">
+              <form method="post" action="{% url 'basket_add' product.pk %}">
+            {% csrf_token %}
+            {{ form_basket }}
+            <button type="submit" class="btn btn-warning shadow-0">Добавить в корзину</button>
+            </form>
+            </div>
+          </div>
+        </div>
+           </main>
+        </div>
+    </div>
 
 {#    {% if request.user.is_authenticated %}#}
 {#        <form method="post">#}
@@ -43,10 +63,5 @@
 {#        </form>#}
 {#    {% endif %}#}
 
-        <form method="post" action="{% url 'basket_add' product.pk %}">
-            {% csrf_token %}
-            {{ form_basket }}
-            <button type="submit" class="bt btn-success">Добавить в корзину</button>
-        </form>
 
     {% endblock %}

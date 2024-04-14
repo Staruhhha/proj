@@ -30,5 +30,8 @@ urlpatterns = [
     path('testmodule/', include('testmodule.urls')),
     path('basket/', include('basket.urls'))
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 
 handler404 = 'magazine.urls.error_404'

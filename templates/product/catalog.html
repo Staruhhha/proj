@@ -16,21 +16,28 @@
             <a href="{% url 'create_product_page' %}">Добавить товар</a>
         </p>
     {% endif %}
+    <div class="container">
 
-    <div>
+
+    <div class="row">
         {% for object in list_object %}
 
-        <div class="card" style="width: 18rem;">
+        <div class="col-lg-3 col-sm-4">
+        <div class="card" style="width: 18rem; margin:20px">
             <!--<img src="..." class="card-img-top" alt="...">-->
-            <div class="card-body">
+            <div class="card-body" style="">
+                 <img src="{{ object.photo.url }}" class="card-img-top" alt="Product Image">
                 <h5 class="card-title">{{ object.name }}</h5>
-                <p class="card-text">{{ object.description }}</p>
+{#                <p class="card-text">{{ object.description }}</p>#}
                 <h6 class="card-text">{{ object.price }} руб.</h6>
                 <a href="{% url 'detail_product_page' object.pk%}" class="btn btn-primary">Подробнее</a>
             </div>
+
         </div>
+    </div>
         {% endfor %}
 
+    </div>
     </div>
     {% endblock %}
 

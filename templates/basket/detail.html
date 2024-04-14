@@ -7,41 +7,45 @@
 
 {% block content %}
     <h1>Ваша корзина</h1>
-    <table class="basket">
-        <thead>
-            <tr>
-                <th>Продукт</th>
-                <th>Количество</th>
-                <th>Цена за единицу</th>
-                <th>Цена за позицию</th>
-                <th>Действие</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in basket %}
-                {% with product=item.product %}
-                    <tr>
-                        <td>
-                            <a href="{{ product.get_absolute_url }}">
-                                {{ product.name }}
-                            </a>
-                        </td>
-                        <td>{{ item.quantity }}</td>
-                        <td class="num">{{ item.price }} руб.</td>
-                        <td class="num">{{ item.total_price }} руб.</td>
-                        <td><a href="{% url 'basket_rm' item.product.pk %}">Убрать из корзины</a></td>
-                    </tr>
-                {% endwith %}
-            {% endfor %}
-        <tr class="total">
-            <td>Всего</td>
-            <td colspan="4"></td>
-            <td class="num">{{ basket.get_total_price }} руб.</td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="text-right">
-        <a href="#" class="btn btn-outline-secondary">Купить</a>
+        {% for item in basket %}
+        {% with product=item.product %}
+             <div class="row gy-3 mb-4">
+                      <div class="col-lg-5">
+                        <div class="me-lg-5">
+                          <div class="d-flex">
+                            <img src="{{ product.photo.url }}" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                            <div class="">
+                              <a href="{% url 'detail_product_page' product.pk %}" class="nav-link">{{ product.name }}</a>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                        <div class="">
+                          <p style="width: 100px;">{{ item.quantity }}</p>
+                        </div>
+                        <div class="">
+                          <text class="h6">{{ item.total_price }} </text> <br />
+                          <small class="text-muted text-nowrap"> {{ item.price }} / за единицу </small>
+                        </div>
+                      </div>
+                      <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                        <div class="float-md-end">
+                          <a href="{% url 'basket_rm' item.product.pk %}" class="btn btn-light border text-danger icon-hover-danger"> Удалить</a>
+                        </div>
+                      </div>
+             </div>
+        {% endwith %}
+        {% endfor %}
+        <div class="border-top pt-4 mx-4 mb-4">
+            <p><i class="fas fa-truck text-muted fa-lg"></i>Всего: {{ basket.get_total_price }} руб.</p>
+         <a href="#" class="btn btn-outline-secondary">Купить</a>
         <a href="{% url 'catalog_product_page' %}" class="btn btn-outline-success">Вернуться в каталог</a>
-    </p>
+          </div>
+
+
+
+
+
 {% endblock %}

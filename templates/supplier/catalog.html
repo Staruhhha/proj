@@ -1,5 +1,5 @@
 {% extends 'temp/base.html' %}
-
+{% load static %}
     {% block title_name %}
         Поставщики
     {% endblock %}
@@ -23,8 +23,8 @@
             <div class="card">
                 <h5 class="card-header">{{ supplier.name }}</h5>
                 <div class="card-body">
-                    <p class="card-text">{{ supplier.agent_firstname }} {{ supplier.agent_name|slice:"0:1" }}. {{ supplier.agent_patronymic|slice:"0:1" }}.</p>
-                    <a href="{% url 'supplier_by_FIO' f"{supplier.agent_firstname}-{supplier.agent_name}" %}" class="btn btn-primary">Подробнее</a>
+                    <p class="card-text">{{ supplier.agent_firstname }} {{ supplier.agent_name|slice:"0:1" }}. {% if supplier.agent_patronymic %} {{ supplier.agent_patronymic|slice:"0:1" }}. {% endif %}</p>
+                    <a href="{% url 'detail_supplier_page' supplier.pk %}" class="btn btn-primary">Подробнее</a>
                 </div>
             </div>
         {% endfor %}

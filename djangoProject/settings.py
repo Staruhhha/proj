@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'SERVER': '127.0.0.1',
         'PORT': '5432',
-        'NAME': 'p1507',
+        'NAME': 'magazine',
         'USER': 'postgres',
         'PASSWORD': 'simosa'
     }
@@ -131,6 +131,12 @@ if DEBUG:
     ]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+MEDIA_URL = '/media/'
+
+# Путь хранения картинок
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
